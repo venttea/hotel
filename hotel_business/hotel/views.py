@@ -165,3 +165,11 @@ def book_service(request):
         'guests': guests,
         'services': services
     })
+
+
+# Страница просмотра записей клиентов на услуги
+@login_required
+@user_passes_test(is_manager)
+def view_service_bookings(request):
+    bookings = ServiceBooking.objects.all().order_by('-booking_date')
+    return render(request, 'hotel/view_bookings.html', {'bookings': bookings})
