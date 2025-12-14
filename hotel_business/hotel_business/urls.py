@@ -32,4 +32,7 @@ urlpatterns = [
 
     # Страница номерного фонда
     path('manager/rooms/', hotel_views.room_list, name='room_list'),
+
+    # Страница записи клиента на услугу
+    path('manager/book-service/', hotel_views.book_service, name='book_service'),
 ]
