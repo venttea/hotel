@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Записи на услуги</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Записи на услуги</div>
+            <div class="nav">
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="view_bookings_container">
+
+        <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+        <!-- Таблица -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Клиент</th>
+                    <th>Услуга</th>
+                    <th>Дата</th>
+                    <th>Время создания</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.guest.FIO }}</td>
+                    <td>{{ booking.service.Name }}</td>
+                    <td>{{ booking.booking_date }}</td>
+                    <td>{{ booking.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
