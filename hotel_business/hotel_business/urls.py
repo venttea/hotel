@@ -1,22 +1,29 @@
-"""
-URL configuration for hotel_business project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from hotel import views as hotel_views
 
 urlpatterns = [
+
+    # Админка
     path('admin/', admin.site.urls),
+
+    # Вход в систему
+    path('', hotel_views.login_view, name='login'),
+    path('login/', hotel_views.login_view, name='login'),
+    path('logout/', hotel_views.logout_view, name='logout'),
+
+    # Главная страница (после входа)
+    path('home/', hotel_views.home, name='home'),
+
+    # Страница доступная без авторизации
+    path('services/', hotel_views.service_list, name='service_list'),
+
+    # Страница имеющихся бронирований
+    path('bookings/', hotel_views.booking_list, name='booking_list'),
+
+    # Страница создания бронирования
+    path('bookings/create/', hotel_views.booking_create, name='booking_create'),
+
+    # Просмотр списка клиентов
+    path('manager/clients/', hotel_views.client_list, name='client_list'),
 ]
