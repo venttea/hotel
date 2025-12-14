@@ -139,3 +139,29 @@ def room_list(request):
         'current_beds': beds or '',
         'current_category': category or ''
     })
+
+
+# Запись клиента на услугу
+@login_required
+@user_passes_test(is_manager)
+def book_service(request):
+    if request.method == 'POST':
+        guest_id = request.POST.get('guest')
+        service_id = request.POST.get('service')
+        date = request.POST.get('date')
+
+        # Сохранение записи
+        ServiceBooking.objects.create(
+            guest_id=guest_id,
+            service_id=service_id,
+            booking_date=date
+        )
+        return redirect('book_service')
+
+    guests = Guest.objects.all()
+    services = Service.objects.all()
+
+    return render(request, 'hotel/book_service.html', {
+        'guests': guests,
+        'services': services
+    })
