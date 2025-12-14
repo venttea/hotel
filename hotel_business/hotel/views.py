@@ -114,3 +114,28 @@ def manager_service_list(request):
         'services': services,
         'search_query': search_query
     })
+
+
+# Просмотр номерного фонда с фильтрацией
+@login_required
+@user_passes_test(is_manager)
+def room_list(request):
+    rooms = Suite.objects.all()
+    categories = Category.objects.all()
+
+    # Фильтр по количеству кроватей
+    beds = request.GET.get('beds')
+    if beds:
+        rooms = rooms.filter(Quantity_bed=beds)
+
+    # Фильтр по категории
+    category = request.GET.get('category')
+    if category:
+        rooms = rooms.filter(Category_id=category)
+
+    return render(request, 'hotel/room_list.html', {
+        'rooms': rooms,
+        'categories': categories,
+        'current_beds': beds or '',
+        'current_category': category or ''
+    })
