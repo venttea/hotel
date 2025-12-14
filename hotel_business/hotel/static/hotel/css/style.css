@@ -610,3 +610,41 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* Стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+/* Стили для заголовков таблицы */
+thead tr {
+    background: #a73853;
+    color: white;
+}
+
+/* Стили для th */
+th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Стили для tr */
+tbody tr {
+    border-bottom: 1px solid #a73853;
+}
+
+/* Стили для td */
+td {
+    padding: 12px;
+}
+
+.view_bookings_container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
