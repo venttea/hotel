@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Запись на услугу</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Запись на услугу</div>
+            <div class="nav">
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container booking-page-container">
+
+        <!-- Форма записи -->
+        <div class="booking-form-container">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Выбор клиента -->
+                <div class="booking-form-group">
+                    <label>Клиент:</label>
+                    <select name="guest" class="booking-form-select" required>
+                        <option value="">Выберите клиента</option>
+                        {% for guest in guests %}
+                        <option value="{{ guest.id }}">
+                            {{ guest.FIO }} (тел: {{ guest.Number_of_phone }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Выбор услуги -->
+                <div class="booking-form-group">
+                    <label>Услуга:</label>
+                    <select name="service" class="booking-form-select" required>
+                        <option value="">Выберите услугу</option>
+                        {% for service in services %}
+                        <option value="{{ service.id }}">
+                            {{ service.Name }} - {{ service.Price }} ₽
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Выбор даты -->
+                <div class="booking-form-group">
+                    <label>Дата оказания услуги:</label>
+                    <input type="date" name="date" class="booking-form-input" required>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="booking-submit-btn">Записать клиента на услугу</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
