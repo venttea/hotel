@@ -29,4 +29,7 @@ urlpatterns = [
 
     # Просмотр услуг от лмца менеджера
     path('manager/services/', hotel_views.manager_service_list, name='manager_service_list'),
+
+    # Страница номерного фонда
+    path('manager/rooms/', hotel_views.room_list, name='room_list'),
 ]
