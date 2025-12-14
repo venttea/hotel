@@ -66,14 +66,6 @@ class Service(models.Model):
     Description = models.CharField(max_length=100)
 
 
-# ОКАЗАНИЕ УСЛУГИ
-class Provision(models.Model):
-    Booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name='provisions')
-    Service_id = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='provisions')
-    Quantity = models.IntegerField()
-    Date_of_provision = models.DateField()
-
-
 # РОЛИ
 class UserRole(models.Model):
     ROLE_CHOICES = (('admin', 'Администратор'), ('manager', 'Менеджер'), ('client', 'Клиент'))
