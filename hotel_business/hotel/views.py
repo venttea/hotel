@@ -98,3 +98,19 @@ def is_manager(user):
 def client_list(request):
     clients = Guest.objects.all()
     return render(request, 'hotel/client_list.html', {'clients': clients})
+
+
+# Просмотр услуг с поиском
+@login_required
+@user_passes_test(is_manager)
+def manager_service_list(request):
+    services = Service.objects.all()
+
+    search_query = request.GET.get('q')
+    if search_query:
+        services = services.filter(Name__icontains=search_query)
+
+    return render(request, 'hotel/service_list.html', {
+        'services': services,
+        'search_query': search_query
+    })
