@@ -35,4 +35,7 @@ urlpatterns = [
 
     # Страница записи клиента на услугу
     path('manager/book-service/', hotel_views.book_service, name='book_service'),
+
+    # Страница просмотра записей клиентов на услуги
+    path('manager/service-bookings/', hotel_views.view_service_bookings, name='view_service_bookings'),
 ]
