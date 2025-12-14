@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Номера</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Номера гостиницы</div>
+            <div class="nav">
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+    <div class="container">
+
+        <!-- Форма фильтров -->
+        <form method="get" class="room-filters-form">
+            <!-- Фильтр по кроватям -->
+            <div class="room-filter-group">
+                <label>Спальных мест:</label>
+                <select name="beds">
+                    <option value="">Все</option>
+                    <option value="1" {% if current_beds == '1' %}selected{% endif %}>1</option>
+                    <option value="2" {% if current_beds == '2' %}selected{% endif %}>2</option>
+                </select>
+            </div>
+
+            <!-- Фильтр по категории -->
+            <div class="room-filter-group">
+                <label>Категория:</label>
+                <select name="category">
+                    <option value="">Все</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if current_category == cat.id %}selected{% endif %}>
+                        {{ cat.title }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Кнопки -->
+            <button type="submit" class="room-filter-btn">Применить фильтры</button>
+            <a href="{% url 'room_list' %}" class="room-reset-btn">Сбросить все</a>
+        </form>
+
+        <!-- Карточки номеров -->
+        <div class="services-grid">
+            {% for room in rooms %}
+            <div class="service-card">
+                <h3>Номер #{{ room.id }}</h3>
+                <p>Категория: {{ room.Category_id.title }}</p>
+                <p>Этаж: {{ room.Floor }}</p>
+                <p>Комнат: {{ room.Quantity_room }}</p>
+                <p>Мест: {{ room.Quantity_bed }}</p>
+                <div class="price">{{ room.Category_id.price }} ₽/сутки</div>
+            </div>
+            {% empty %}
+            <p>Нет номеров по выбранным фильтрам</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
