@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Гостиница</div>
+            <div class="nav">
+                <a href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">Добро пожаловать!</h1>
+            <p class="welcome-text">Вы успешно вошли в систему гостиницы (o´▽`o)ﾉ</p>
+            <div class="action-buttons">
+
+                <!-- Кнопки для администратора -->
+                {% if user.username == "Администратор" %}
+                <a href="/admin" class="action-btn admin-btn">Панель управления</a>
+
+                <!-- Кнопки для менеджера -->
+                {% elif user.username == "Менеджер" %}
+                <a href="{% url 'client_list' %}" class="action-btn admin-btn">Список клиентов</a>
+                <a href="/" class="action-btn admin-btn">Список услуг</a>
+                <a href="/" class="action-btn admin-btn">Номерной фонд</a>
+                <a href="/" class="action-btn admin-btn">Запись клиента на услугу</a>
+
+                <!-- Кнопки для клиента -->
+                {% else %}
+                <a href="{% url 'service_list' %}" class="action-btn services-btn">Посмотреть услуги</a>
+                <a href="{% url 'booking_list' %}" class="action-btn bookings-btn">Мои бронирования</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

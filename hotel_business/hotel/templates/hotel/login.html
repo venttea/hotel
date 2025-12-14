@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в систему</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2 class="login-title">Вход в систему 	(*^‿^*)</h2>
+
+            {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Логин:</label>
+                    <input type="text" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input type="password" name="password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Войти</button>
+            </form>
+
+            <div class="guest-link">
+                <a href="{% url 'service_list' %}">Посмотреть услуги как гость</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

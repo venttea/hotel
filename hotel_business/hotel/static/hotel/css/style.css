@@ -1,0 +1,396 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff3dd;
+
+    /* Для картинки на задний фон*/
+    /* background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        url('/static/hotel/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #e49b0f;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    pointer: cursor;
+    transition: background-color 0.3s;
+}
+
+.user-greeting {
+    color: white;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background-color: #a73853;
+    color: white;
+}
+
+.admin-btn {
+    background-color: #e49b0f;
+    color: white;
+}
+
+.action-btn:hover {
+    background-color: #e49b0f;
+}
+
+.admin-btn:hover {
+    background-color: #a73853;
+}
+
+.order-btn {
+    background-color: #A73853;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(167, 56, 83, 0.3);
+}
+
+.login-to-order-btn {
+    background-color: #A73853;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(167, 56, 83, 0.3);
+}
+
+.create-btn {
+    background-color: #A73853;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(167, 56, 83, 0.3);
+}
+
+.create-btn:hover {
+    background-color: #8c2d45;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(167, 56, 83, 0.4);
+}
+
+.login-btn {
+    background-color: #A73853;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(167, 56, 83, 0.3);
+}
+
+.login-btn:hover {
+    background-color: #e49b0f;
+}
+
+.submit-btn {
+    background-color: #A73853;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(167, 56, 83, 0.3);
+}
+
+.submit-btn:hover {
+    background-color: #8c2d45;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(167, 56, 83, 0.4);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.service-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #e49b0f;
+    transition: transform 0.3s ease;
+}
+
+.service-card h3 {
+    color: #a73853;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.price {
+    color: #e49b0f;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.welcome-section {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-left: 350px;
+    font-weight: bold;
+    background-color: #a73853;
+    color: white;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background-color: #e49b0f;
+}
+.welcome-title {
+    color: #a73853;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    color: #666;
+    margin: 30px;
+}
+
+.action-buttons {
+    margin-top: 30px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-title {
+    text-align: center;
+    color: #a73853;
+    margin-bottom: 20px;
+}
+
+.guest-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.guest-link a {
+    color: #1925bb;
+    text-decoration: none;
+}
+
+.guest-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #ffe5b9;
+    color: #e49b0f;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #e49b0f;
+}
+
+.page-title {
+    text-align: center;
+    color: #E49B0F;
+    margin-bottom: 20px;
+    font-size: 70px;
+}
+
+.page-title-services {
+    text-align: center;
+    color: #E49B0F;
+    font-size: 70px;
+    margin-top: 20px;
+}
+
+.create-booking-link {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.booking-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 4px solid #e49b0f;
+}
+
+.booking-card h3 {
+    color: #a73853;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.booking-card p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.booking-price {
+    color: #A73853;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.no-bookings {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.no-bookings h3 {
+    color: #a73853;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.no-bookings p {
+    color: #666;
+    margin: 30px;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.back-link {
+    text-align: center;
+}
+
+.back-link a {
+    color: #e49b0f;
+    text-decoration: none;
+}

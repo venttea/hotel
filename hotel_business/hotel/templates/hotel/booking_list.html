@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мои бронирования</title>
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Мои бронирования</div>
+            <div class="nav">
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'service_list' %}">Услуги</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+    <div class="container">
+        <h2 class="page-title">Мои бронирования</h2>
+
+        <div class="create-booking-link">
+            <a href="{% url 'booking_create' %}" class="create-btn">Создать бронирование</a>
+        </div>
+
+        <div class="bookings-grid">
+            {% for booking in bookings %}
+            <div class="booking-card">
+                <h3>Номер {{ booking.Room_id.id }}</h3>
+                <p>Категория: {{ booking.Room_id.Category_id.title }}</p>
+                <p>Даты: {{ booking.Arrival_date }} - {{ booking.Departure_date }}</p>
+                <p>Гость: {{ booking.Guest_id.FIO }}</p>
+                <p>Статус:
+                    {% if booking.Paid_fact == booking.Price %}
+                        Оплачено
+                    {% elif booking.Paid_fact > 0 %}
+                        Частично
+                    {% else %}
+                        Ожидает
+                    {% endif %}
+                </p>
+                <div class="booking-price">{{ booking.Price }} руб.</div>
+            </div>
+            {% empty %}
+            <div class="no-bookings">
+                <h3>Бронирований нет</h3>
+                <p>У вас пока нет активных бронирований</p>
+                <a href="{% url 'booking_create' %}" class="create-btn">Создать бронирование</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
