@@ -24,6 +24,27 @@
     <div class="container">
         <h2 class="page-title-services">Наши услуги</h2>
 
+        <!-- Форма поиска для менеджера -->
+        {% if user.username == "Менеджер" %}
+        <div class="manager-search-container">
+            <form method="get" action="{% url 'manager_service_list' %}" class="manager-search-form">
+                <input type="text"
+                       name="q"
+                       placeholder="Введите название услуги для поиска..."
+                       value="{{ search_query|default:'' }}"
+                       class="manager-search-input">
+
+                <button type="submit" class="manager-search-btn">Поиск</button>
+
+                {% if search_query %}
+                <a href="{% url 'manager_service_list' %}" class="manager-reset-link">
+                    Сбросить
+                </a>
+                {% endif %}
+            </form>
+        </div>
+        {% endif %}
+
         <div class="services-grid">
             {% for service in services %}
             <div class="service-card">
