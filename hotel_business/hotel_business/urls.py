@@ -24,6 +24,9 @@ urlpatterns = [
     # Страница создания бронирования
     path('bookings/create/', hotel_views.booking_create, name='booking_create'),
 
-    # Просмотр списка клиентов
+    # Просмотр списка клиентов от лица менеджера
     path('manager/clients/', hotel_views.client_list, name='client_list'),
+
+    # Просмотр услуг от лмца менеджера
+    path('manager/services/', hotel_views.manager_service_list, name='manager_service_list'),
 ]
