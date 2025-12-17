@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА С УСЛУГАМИ -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,59 +9,104 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Услуги гостиницы</div>
             <div class="nav">
+
+                <!-- Навигация, если пользователь авторизован -->
                 {% if user.is_authenticated %}
                     <a href="{% url 'home' %}">Главная</a>
-                    <a href="{% url 'booking_list' %}">Мои бронирования</a>
+
+                    <!-- Кнопка "Мои бронирования", если пользователь НЕ менеджер-->
+                    {% if user.username != "Менеджер" %}
+                        <a href="{% url 'booking_list' %}">Мои бронирования</a>
+                    {% endif %}
+
                     <a href="{% url 'logout' %}">Выйти</a>
+
+                <!-- Навигация, если пользователь не авторизован -->
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>
                 {% endif %}
             </div>
         </div>
     </div>
-    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+    <!-- Список услуг -->
     <div class="container">
         <h2 class="page-title-services">Наши услуги</h2>
 
-        <!-- Форма поиска для менеджера -->
+        <!-- Строка поиска ТОЛЬКО если пользователь менеджер -->
         {% if user.username == "Менеджер" %}
         <div class="manager-search-container">
-            <form method="get" action="{% url 'manager_service_list' %}" class="manager-search-form">
-                <input type="text"
-                       name="q"
-                       placeholder="Введите название услуги..."
-                       value="{{ search_query|default:'' }}"
-                       class="manager-search-input">
-
+            <form method="get" action="{% url 'service_list' %}" class="manager-search-form">
+                <input type="text" name="q" placeholder="Введите название услуги для поиска..." value="{{ search_query|default:'' }}" class="manager-search-input">
                 <button type="submit" class="manager-search-btn">Поиск</button>
 
+                <!-- Если есть запрос - появление кнопки "Сбросить" -->
                 {% if search_query %}
-                <a href="{% url 'manager_service_list' %}" class="manager-reset-link">
-                    Сбросить
-                </a>
+                <a href="{% url 'service_list' %}" class="manager-reset-link">Сбросить</a>
                 {% endif %}
             </form>
         </div>
         {% endif %}
 
+        <!-- Карточки с услугами -->
         <div class="services-grid">
-            {% for service in services %}
-            <div class="service-card">
+            {% for item in services_data %}
+            {% with service=item.service %}
+
+            <!-- 1. Если пользователь менеджер, карточка серая -->
+            <!-- 2. Подсветка карточки зеленым, если скидка больше 10 -->
+            <div class="service-card
+                {% if not user.is_authenticated %}service-unavailable{% endif %}
+                {% if item.discount_percent > 10 %}high-discount{% endif %}">
+
                 <h3>{{ service.Name }}</h3>
                 <p>{{ service.Description }}</p>
-                <div class="price">{{ service.Price }} ₽</div>
+
+                <!-- Контейнер для цены -->
+                <div class="price-container">
+
+                    <!-- Цена для неавторизованного пользователя -->
+                    {% if not user.is_authenticated %}
+                    <div class="price price-gray">{{ item.original_price }} ₽</div>
+                    <div class="unavailable-label">Недоступно</div>
+
+                    <!-- Цена для авторизованного пользователя со скидкой -->
+                    {% elif item.has_discount %}
+                    <div class="old-price">{{ item.original_price }} ₽</div>
+                    <div class="new-price">{{ item.discounted_price|floatformat:2 }} ₽</div>
+                    <div class="discount-badge">-{{ item.discount_percent }}%</div>
+
+                    <!-- Цена для авторизованного пользователя без скидки -->
+                    {% else %}
+                    <div class="price">{{ item.original_price }} ₽</div>
+                    {% endif %}
+                </div>
+
+                <!-- Условие, если пользователь зарегистрирован и не является менеджером -->
                 {% if user.is_authenticated %}
-                <button class="order-btn">Заказать</button>
+                    {% if user.username != "Менеджер" %}
+
+                        <!-- Есть кнопка "Заказать" -->
+                        <button class="order-btn">Заказать</button>
+                        {% endif %}
                 {% else %}
-                <a href="{% url 'login' %}" class="login-to-order-btn">Войдите для заказа</a>
+                    <a href="{% url 'login' %}" class="login-to-order-btn">Войдите для заказа</a>
                 {% endif %}
             </div>
+            {% endwith %}
             {% endfor %}
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
