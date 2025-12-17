@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА С ОСНОВНОЙ НАВИГАЦИЕЙ -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Гостиница</div>
@@ -15,7 +20,7 @@
         </div>
     </div>
 
-
+    <!-- Контейнер для кнопок навигации -->
     <div class="container">
         <div class="welcome-section">
             <h1 class="welcome-title">Добро пожаловать!</h1>
@@ -24,23 +29,27 @@
 
                 <!-- Кнопки для администратора -->
                 {% if user.username == "Администратор" %}
-                <a href="/admin" class="action-btn admin-btn">Панель управления</a>
+                    <a href="/admin" class="action-btn admin-btn">Панель управления</a>
 
                 <!-- Кнопки для менеджера -->
                 {% elif user.username == "Менеджер" %}
-                <a href="{% url 'client_list' %}" class="action-btn admin-btn">Список клиентов</a>
-                <a href="{% url 'manager_service_list' %}" class="action-btn admin-btn">Список услуг</a>
-                <a href="{% url 'room_list' %}" class="action-btn admin-btn">Номерной фонд</a>
-                <a href="{% url 'book_service' %}" class="action-btn admin-btn">Запись клиента на услугу</a>
-                <a href="{% url 'view_service_bookings' %}" class="action-btn admin-btn">Просмотр записей на услуги</a>
+                    <a href="{% url 'client_list' %}" class="action-btn admin-btn">Список клиентов</a>
+                    <a href="{% url 'service_list' %}" class="action-btn admin-btn">Список услуг</a>
+                    <a href="{% url 'room_list' %}" class="action-btn admin-btn">Номерной фонд</a>
+                    <a href="{% url 'book_service' %}" class="action-btn admin-btn">Запись клиента на услугу</a>
 
                 <!-- Кнопки для клиента -->
                 {% else %}
-                <a href="{% url 'service_list' %}" class="action-btn services-btn">Посмотреть услуги</a>
-                <a href="{% url 'booking_list' %}" class="action-btn bookings-btn">Мои бронирования</a>
+                    <a href="{% url 'service_list' %}" class="action-btn services-btn">Посмотреть услуги</a>
+                    <a href="{% url 'booking_list' %}" class="action-btn bookings-btn">Мои бронирования</a>
                 {% endif %}
             </div>
         </div>
     </div>
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
+
 </body>
 </html>
