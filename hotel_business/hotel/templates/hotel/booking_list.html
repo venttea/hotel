@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА ИМЕЮЩИХСЯ БРОНИРОВАНИЙ У ПОЛЬЗОВАТЕЛЯ -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Мои бронирования</div>
@@ -16,14 +21,15 @@
             </div>
         </div>
     </div>
-    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+    <!-- Контейнер для карточек -->
     <div class="container">
         <h2 class="page-title">Мои бронирования</h2>
-
         <div class="create-booking-link">
             <a href="{% url 'booking_create' %}" class="create-btn">Создать бронирование</a>
         </div>
 
+        <!-- Карточки бронированиваний -->
         <div class="bookings-grid">
             {% for booking in bookings %}
             <div class="booking-card">
@@ -42,6 +48,8 @@
                 </p>
                 <div class="booking-price">{{ booking.Price }} руб.</div>
             </div>
+
+            <!-- Сообщение, если нет бронирований -->
             {% empty %}
             <div class="no-bookings">
                 <h3>Бронирований нет</h3>
@@ -51,5 +59,10 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
