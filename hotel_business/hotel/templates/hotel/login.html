@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА АВТОРИЗАЦИИ -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -10,28 +13,27 @@
         <div class="login-form">
             <h2 class="login-title">Вход в систему 	(*^‿^*)</h2>
 
-            {% if error %}
-            <div class="error-message">
-                {{ error }}
-            </div>
-            {% endif %}
-
+            <!-- Форма для авторизации -->
             <form method="post">
                 {% csrf_token %}
 
+                <!-- Строка ввода логина -->
                 <div class="form-group">
                     <label>Логин:</label>
                     <input type="text" name="username" required>
                 </div>
 
+                <!-- Строка ввода пароля -->
                 <div class="form-group">
                     <label>Пароль:</label>
                     <input type="password" name="password" required>
                 </div>
 
+                <!-- Кнопка "Войти" -->
                 <button type="submit" class="login-btn">Войти</button>
             </form>
 
+            <!-- Кнопка, чтобы посмотреть услуги в качестве гостя -->
             <div class="guest-link">
                 <a href="{% url 'service_list' %}">Посмотреть услуги как гость</a>
             </div>
