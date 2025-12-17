@@ -91,6 +91,25 @@ def booking_create(request):
 def is_manager(user):
     return user.username == "Менеджер"
 
+
+# Отображение списка клиентов с сортировкой
+@login_required
+@user_passes_test(is_manager)
+def client_list(request):
+    sort_direction = request.GET.get('sort', 'asc')
+
+    # Сортировка А-Я
+    if sort_direction == 'asc':
+        clients = Guest.objects.all().order_by('FIO')
+
+    # Сортировка Я-А
+    else:
+        clients = Guest.objects.all().order_by('-FIO')
+    return render(request, 'hotel/client_list.html', {
+        'clients': clients,
+        'sort_direction': sort_direction
+    })
+
 # Отображение услуг всем типам пользователей
 def service_list(request):
     services = Service.objects.all()
@@ -162,7 +181,6 @@ def service_list(request):
     if request.user.is_authenticated and request.user.username == "Менеджер":
         context['search_query'] = search_query
     return render(request, 'hotel/service_list.html', context)
-
 
 # Отображение номерного фонда с фильтрацией
 @login_required
