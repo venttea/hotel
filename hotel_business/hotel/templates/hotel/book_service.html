@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА ЗАПИСИ КЛИЕНТА НА УСЛУГУ (ТОЛЬКО ДЛЯ МЕНЕДЖЕРА) -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Запись на услугу</div>
@@ -18,7 +23,19 @@
 
     <div class="container booking-page-container">
 
-        <!-- Форма записи -->
+        <!-- Уведомление -->
+        {% if messages %}
+        <div class="notifications">
+            {% for message in messages %}
+            <div class="notification {{ message.tags }}">
+                {{ message }}
+                <button class="close-notification" onclick="this.parentElement.remove()">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Форма для записи на услугу -->
         <div class="booking-form-container">
             <form method="post">
                 {% csrf_token %}
@@ -60,5 +77,10 @@
             </form>
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
