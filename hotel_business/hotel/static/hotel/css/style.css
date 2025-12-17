@@ -395,7 +395,6 @@ body {
     text-decoration: none;
 }
 
-/* Измененные стили для строки поиска */
 .manager-search-container {
     margin: 20px 0;
     padding: 0;
@@ -424,7 +423,6 @@ body {
     max-width: 600px;
 }
 
-/* Чтобы строка была на одном уровне с карточками */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -435,7 +433,6 @@ body {
     padding-left: 0;
 }
 
-/* Кнопка поиска */
 .manager-search-btn {
     padding: 14px 30px;
     height: 50px;
@@ -457,7 +454,6 @@ body {
     transform: translateY(0);
 }
 
-/* Кнопка "Сбросить" */
 .manager-reset-link {
     padding: 0px 20px;
     line-height: 50px;
@@ -475,14 +471,12 @@ body {
     color: white;
 }
 
-/* Контейнер для выравнивания */
 .manager-search-container {
     display: flex;
     justify-content: center;
     margin: 30px 0;
 }
 
-/* Форма фильтров */
 .room-filters-form {
     margin: 20px 0;
     padding: 20px;
@@ -490,7 +484,6 @@ body {
     border-radius: 10px;
 }
 
-/* Группа фильтров */
 .room-filter-group {
     display: inline-block;
     margin-right: 30px;
@@ -514,7 +507,6 @@ body {
     cursor: pointer;
 }
 
-/* Кнопки фильтров */
 .room-filter-btn {
     padding: 10px 25px;
     background-color: #a73853;
@@ -550,7 +542,6 @@ body {
     text-decoration: none;
 }
 
-/* Основной контейнер формы */
 .booking-form-container {
     max-width: 500px;
     margin: 30px auto;
@@ -560,7 +551,6 @@ body {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Группа полей формы */
 .booking-form-group {
     margin-bottom: 25px;
 }
@@ -573,7 +563,6 @@ body {
     font-size: 18px;
 }
 
-/* Стили для всех полей ввода и select */
 .booking-form-select,
 .booking-form-input {
     width: 100%;
@@ -586,7 +575,6 @@ body {
     transition: all 0.3s;
 }
 
-/* Кнопка отправки */
 .booking-submit-btn {
     width: 100%;
     padding: 16px;
@@ -604,38 +592,32 @@ body {
     background: #e49b0f;
 }
 
-/* Контейнер для выравнивания */
 .booking-page-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Стили для таблицы */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
 
-/* Стили для заголовков таблицы */
 thead tr {
     background: #a73853;
     color: white;
 }
 
-/* Стили для th */
 th {
     padding: 12px;
     text-align: left;
 }
 
-/* Стили для tr */
 tbody tr {
     border-bottom: 1px solid #a73853;
 }
 
-/* Стили для td */
 td {
     padding: 12px;
 }
@@ -647,4 +629,197 @@ td {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.service-unavailable {
+    background-color: #f5f5f5 !important;
+    border-color: #ddd !important;
+    opacity: 0.9;
+}
+
+.price-gray {
+    color: #999 !important;
+    text-decoration: line-through;
+}
+
+.unavailable-label {
+    color: #777;
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 8px;
+    display: block;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.new-price {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.discount-badge {
+    background: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.high-discount {
+    background-color: #98fadd !important;
+    border: 2px solid #2ecc71 !important;
+    box-shadow: 0 4px 12px rgba(152, 250, 221, 0.3);
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    min-height: 40px;
+}
+
+.sort-buttons {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sort-buttons span {
+    font-weight: bold;
+    color: #333;
+}
+
+.sort-btn {
+    padding: 8px 20px;
+    background: #e9ecef;
+    color: #495057;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s;
+}
+
+.sort-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.high-discount-value {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 2px 8px;
+    background: #ffeaea;
+    border-radius: 4px;
+}
+
+.notifications {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.notification {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    min-width: 300px;
+}
+
+.notification.success {
+    background: #27ae60;
+    border-left: 5px solid #229954;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 15px;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+.sort-label {
+    color: #a73853;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 25px;
+}
+
+.sort-btn {
+    padding: 8px 15px;
+    margin: 0 5px;
+    background: #e49b0f;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sort-btn.active {
+    background: #a73853;
+    color: white;
+    font-weight: bold;
+}
+
+.sort-container {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.client-card {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 4px 0;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.2;
+    border-top: 1px solid #3498db;
+}
+
+.site-footer {
+    background: #E49B0F;
+    color: white;
+    font-weight: bold;
+    margin-top: 180px;
+    padding: 25px 0 15px;
+    text-align: center;
 }
