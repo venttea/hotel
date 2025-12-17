@@ -228,6 +228,11 @@ def book_service(request):
                 booking_date=date
             )
 
+            # Сообщение об успехе
+            messages.success(
+                request,
+                f'Клиент "{guest.FIO}" записан на услугу "{service.Name}" на {date}'
+            )
 
         # Сообщение об ошибке
         except Exception as e:
