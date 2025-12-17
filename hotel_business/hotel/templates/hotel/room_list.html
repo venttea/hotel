@@ -1,3 +1,6 @@
+
+<!-- СПИСОК НОМЕРОВ (ТОЛЬКО ДЛЯ МЕНЕДЖЕРА) -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Номера гостиницы</div>
@@ -16,12 +21,11 @@
         </div>
     </div>
 
-    <a href="javascript:history.back()" class="back-btn">← Назад</a>
-
     <div class="container">
 
         <!-- Форма фильтров -->
         <form method="get" class="room-filters-form">
+
             <!-- Фильтр по кроватям -->
             <div class="room-filter-group">
                 <label>Спальных мест:</label>
@@ -32,7 +36,7 @@
                 </select>
             </div>
 
-            <!-- Фильтр по категории -->
+            <!-- Фильтр по категории номера -->
             <div class="room-filter-group">
                 <label>Категория:</label>
                 <select name="category">
@@ -66,5 +70,10 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
