@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.db.models import Q
-from .models import Service, Booking, Guest, Suite, Category, ServiceBooking
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
+from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -38,14 +37,7 @@ def logout_view(request):
     return redirect('login')
 
 
-# Демонстрация списка услуг всем пользователям
-def service_list(request):
-    services = Service.objects.all()
-    return render(request, 'hotel/service_list.html', {'services': services})
-
-
 # Главная страница после авторизации
-# Декоратор следит за тем, авторизован ли пользователь
 @login_required
 def home(request):
     return render(request, 'hotel/home.html')
@@ -63,6 +55,16 @@ def booking_list(request):
         guest = Guest.objects.get(FIO__contains='Петрова')
     elif username == 'sidorov':
         guest = Guest.objects.get(FIO__contains='Сидоров')
+    elif username == "kozlova":
+        guest = Guest.objects.get(FIO__contains="Козлова")
+    elif username == "vasilev":
+        guest = Guest.objects.get(FIO__contains="Васильев")
+    elif username == "nikolaeva":
+        guest = Guest.objects.get(FIO__contains="Николаева")
+    elif username == "morozov":
+        guest = Guest.objects.get(FIO__contains="Морозов")
+    elif username == "orlova":
+        guest = Guest.objects.get(FIO__contains="Орлова")
     else:
         guest = None
 
@@ -71,12 +73,10 @@ def booking_list(request):
         user_bookings = Booking.objects.filter(Guest_id=guest)
     else:
         user_bookings = Booking.objects.none()
-
-    # Передача найденных данных в шаблон
     return render(request, 'hotel/booking_list.html', {'bookings': user_bookings})
 
 
-# Страница создания бронирования (пока не рабочая)
+# Страница создания бронирования (НЕ РАБОЧАЯ)
 @login_required
 def booking_create(request):
     if request.method == 'POST':
@@ -91,32 +91,80 @@ def booking_create(request):
 def is_manager(user):
     return user.username == "Менеджер"
 
-
-# Просмотр списка клиентов
-@login_required
-@user_passes_test(is_manager)
-def client_list(request):
-    clients = Guest.objects.all()
-    return render(request, 'hotel/client_list.html', {'clients': clients})
-
-
-# Просмотр услуг с поиском
-@login_required
-@user_passes_test(is_manager)
-def manager_service_list(request):
+# Отображение услуг всем типам пользователей
+def service_list(request):
     services = Service.objects.all()
 
-    search_query = request.GET.get('q')
-    if search_query:
+    # Поиск для менеджера
+    search_query = request.GET.get('q', '')
+    if request.user.is_authenticated and request.user.username == "Менеджер" and search_query:
         services = services.filter(Name__icontains=search_query)
 
-    return render(request, 'hotel/service_list.html', {
-        'services': services,
-        'search_query': search_query
-    })
+    # Поиск пользователя для расчета цены с учетом скидки
+    guest = None
+    if request.user.is_authenticated and request.user.username != "Менеджер":
+        try:
+            username = request.user.username
+            if username == "ivanov":
+                guest = Guest.objects.get(FIO__contains="Иванов")
+            elif username == "petrova":
+                guest = Guest.objects.get(FIO__contains="Петрова")
+            elif username == "sidorov":
+                guest = Guest.objects.get(FIO__contains="Сидоров")
+            elif username == "kozlova":
+                guest = Guest.objects.get(FIO__contains="Козлова")
+            elif username == "vasilev":
+                guest = Guest.objects.get(FIO__contains="Васильев")
+            elif username == "nikolaeva":
+                guest = Guest.objects.get(FIO__contains="Николаева")
+            elif username == "morozov":
+                guest = Guest.objects.get(FIO__contains="Морозов")
+            elif username == "orlova":
+                guest = Guest.objects.get(FIO__contains="Орлова")
+        except:
+            guest = None
+
+    # Список услуг с рассчитаными ценами
+    services_data = []
+
+    for service in services:
+        service_data = {
+            'service': service,
+            'original_price': service.Price,
+            'discounted_price': service.Price,
+            'has_discount': False,
+            'discount_percent': 0
+        }
+
+        # Расчет скидки для клиента
+        if guest and guest.Discount > 0:
+            discount_decimal = guest.Discount / 100
+            discounted_price = float(service.Price) * (1 - discount_decimal)
+
+            # Обновление данных услуги
+            service_data.update({
+                'discounted_price': discounted_price,
+                'has_discount': True,
+                'discount_percent': guest.Discount
+            })
+
+        # Добавление услуги в общий список
+        services_data.append(service_data)
+
+    # Подготовка данных для шаблона
+    context = {
+        'services_data': services_data,
+        'guest': guest,
+        'user': request.user,
+    }
+
+    # Доп. данные для менеджера
+    if request.user.is_authenticated and request.user.username == "Менеджер":
+        context['search_query'] = search_query
+    return render(request, 'hotel/service_list.html', context)
 
 
-# Просмотр номерного фонда с фильтрацией
+# Отображение номерного фонда с фильтрацией
 @login_required
 @user_passes_test(is_manager)
 def room_list(request):
@@ -141,7 +189,7 @@ def room_list(request):
     })
 
 
-# Запись клиента на услугу
+# Отображение страницы "Запись клиента на услугу"
 @login_required
 @user_passes_test(is_manager)
 def book_service(request):
@@ -150,12 +198,24 @@ def book_service(request):
         service_id = request.POST.get('service')
         date = request.POST.get('date')
 
-        # Сохранение записи
-        ServiceBooking.objects.create(
-            guest_id=guest_id,
-            service_id=service_id,
-            booking_date=date
-        )
+        try:
+            # Объекты для сообщения
+            guest = Guest.objects.get(id=guest_id)
+            service = Service.objects.get(id=service_id)
+
+            # Сохранение записи
+            ServiceBooking.objects.create(
+                guest_id=guest_id,
+                service_id=service_id,
+                booking_date=date
+            )
+
+
+        # Сообщение об ошибке
+        except Exception as e:
+            messages.error(request, f'Ошибка: {e}')
+
+        # Перенаправление на страницу "Запись на услугу"
         return redirect('book_service')
 
     guests = Guest.objects.all()
@@ -165,11 +225,3 @@ def book_service(request):
         'guests': guests,
         'services': services
     })
-
-
-# Страница просмотра записей клиентов на услуги
-@login_required
-@user_passes_test(is_manager)
-def view_service_bookings(request):
-    bookings = ServiceBooking.objects.all().order_by('-booking_date')
-    return render(request, 'hotel/view_bookings.html', {'bookings': bookings})
