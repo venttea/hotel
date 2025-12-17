@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА СПИСКА КЛИЕНТОВ (ТОЛЬКО ДЛЯ МЕНЕДЖЕРА) -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Услуги гостиницы</div>
@@ -19,26 +24,33 @@
         </div>
     </div>
 
-    <a href="javascript:history.back()" class="back-btn">← Назад</a>
-
+    <!-- Контейнер для карточек -->
     <div class="container">
         <h2 class="page-title-services">Наши клиенты</h2>
 
+        <!-- Контейнер для кнопок сортировки -->
+         <div class="sort-container">
+            <span class="sort-label">Сортировать:</span>
+             <a href="?sort=asc" class="sort-btn {% if sort_direction == 'asc' %}active{% endif %}">ФИО (А-Я)</a>
+             <a href="?sort=desc" class="sort-btn {% if sort_direction == 'desc' %}active{% endif %}">ФИО (Я-А)</a>
+        </div>
+
+        <!-- Карточки клиентов -->
         <div class="services-grid">
             {% for client in clients %}
-            <div class="service-card">  <!-- Используем существующий класс -->
+            <div class="service-card">
                 <h3>{{ client.FIO }}</h3>
                 <p>Телефон: {{ client.Number_of_phone }}</p>
                 <p>Дата рождения: {{ client.Date_of_birth }}</p>
                 <p>Скидка: {{ client.Discount }}%</p>
             </div>
-            {% empty %}
-            <div class="no-bookings">
-                <h3>Клиентов нет</h3>
-                <p>В базе данных пока нет клиентов</p>
-            </div>
             {% endfor %}
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
