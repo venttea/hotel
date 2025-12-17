@@ -1,3 +1,6 @@
+
+<!-- СТРАНИЦА СОЗДАНИЯ БРОНИРОВАНИЯ (НЕ РАБОТАЕТ) -->
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
 </head>
 <body>
+
+    <!-- Шапка -->
     <div class="header">
         <div class="header-content">
             <div class="logo">Новое бронирование</div>
@@ -17,38 +22,50 @@
         </div>
     </div>
 
+    <!-- Форма для создания бронирования -->
     <div class="container">
         <h2 class="page-title">Создание бронирования</h2>
-
         <div class="form-container">
             <div class="form-card">
                 <form>
+
+                    <!-- Выбор номера -->
                     <div class="form-group">
                         <label>Номер:</label>
                         <select name="room">
                             <option value="1">101 - Стандарт</option>
                             <option value="2">102 - Стандарт</option>
+                            <option value="3">103 - Семейный</option>
+                            <option value="4">201 - Люкс</option>
+                            <option value="5">202 - Семейный</option>
+                            <option value="6">203 - Стандарт</option>
+                            <option value="7">301 - Люкс</option>
+                            <option value="8">302 - Семейный</option>
                         </select>
                     </div>
 
+                    <!-- Выбор даты заезда -->
                     <div class="form-group">
                         <label>Заезд:</label>
                         <input type="date" name="arrival_date">
                     </div>
 
+                    <!-- Выбор даты выезда -->
                     <div class="form-group">
                         <label>Выезд:</label>
                         <input type="date" name="departure_date">
                     </div>
 
-                    <button type="button" class="submit-btn" onclick="alert('Форма пока не работает!')">Забронировать</button>
+                    <!-- Кнопка "Забронировать" -->
+                    <button type="button" class="submit-btn" onclick="alert('Форма не работает!')">Забронировать</button>
                 </form>
-            </div>
-
-            <div class="back-link">
-                <a href="{% url 'booking_list' %}">← Назад</a>
             </div>
         </div>
     </div>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <p>© 2025 | Гостиница "Кругосветка" | Все права защищены</p>
+    </footer>
 </body>
 </html>
